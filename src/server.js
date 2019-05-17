@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
 
+const defaultPort = 3333;
+
 // main application
 const app = express();
 
@@ -46,4 +48,4 @@ app.use(require('./routes'));
 const tmpFolder = path.resolve(__dirname, '..', 'tmp');
 app.use('/files', express.static(tmpFolder));
 
-server.listen(3333);
+server.listen(process.env.PORT || defaultPort);
