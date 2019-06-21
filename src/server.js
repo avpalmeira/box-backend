@@ -21,7 +21,7 @@ io.on('connection', (socket) => {
 
 // connecting to database
 const connectionString = [
-  'mongodb+srv://experimentor:30393702a1',
+  'mongodb+srv://<login>:<pass>',
   '@experiments-cluster-gppow.mongodb.net/test?retryWrites=true',
 ].join('');
 mongoose.connect(connectionString, { useNewUrlParser: true });
