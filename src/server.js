@@ -11,6 +11,7 @@ const app = express();
 // using websockets for real time support
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+const connect = require('./connect');
 
 // let users be isolated in their own room
 io.on('connection', (socket) => {
@@ -20,10 +21,7 @@ io.on('connection', (socket) => {
 });
 
 // connecting to database
-const connectionString = [
-  'mongodb+srv://<login>:<pass>',
-  '@experiments-cluster-gppow.mongodb.net/test?retryWrites=true',
-].join('');
+const { connectionString } = connect;
 mongoose.connect(connectionString, { useNewUrlParser: true });
 
 // allow the application to be accessed by any client
