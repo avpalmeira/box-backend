@@ -1,9 +1,13 @@
 ## Box App - Backend
 
-# Database Connection
+# Set environment parameters
 
-To connect your app to a MongoDB database create a .env file inside the root folder with the following content:
+To run your api first create a .env file inside the root folder with the following content:
 
 `
-DB_CONN_STRING=<connection-path>
+DB_CONN=<connection-path>
+DB_NAME=<database-name>
+
+URL=<http://localhost>
+PORT=<port>
 `

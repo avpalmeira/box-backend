@@ -14,6 +14,7 @@ class FileController {
 
     await box.save();
 
+    // emit box update to users connected in the same room
     req.io.sockets.in(box._id).emit('file', file);
 
     return res.json(file);

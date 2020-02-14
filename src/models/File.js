@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const base_url = 'http://localhost:3333';
+const base_url = 'http://localhost:3333'; //HOST:PORT
 
 // defining schema
 const File = new mongoose.Schema(
@@ -21,6 +21,7 @@ const File = new mongoose.Schema(
     }
 );
 
+// define virtual attribute 'url'
 File.virtual('url').get(function() {
     const url = process.env.URL || base_url;
     

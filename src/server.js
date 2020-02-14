@@ -1,50 +1,25 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const path = require('path');
-const cors = require('cors');
 
-const defaultPort = 3333;
+const appConfig = require('./config/appConfig');
+const dbConfig = require('./config/dbConfig');
+const socketConfig = require('./config/socketConfig');
 
-// main application
-const app = express();
+function run() {
 
-// using websockets for real time support
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
-const connect = require('./connect');
+  const defaultPort = 3333;
 
-// let users be isolated in their own room
-io.on('connection', (socket) => {
-  socket.on('connectRoom', (box) => {
-    socket.join(box);
-  });
-});
+  // main application
+  const app = express();
 
-// connecting to database
-const { connectionString } = connect;
-mongoose.connect(connectionString, { useNewUrlParser: true });
+  // using websockets for real time support
+  const server = require('http').Server(app);
+  const io = require('socket.io')(server);
+  
+  appConfig(app, io);
+  socketConfig(io);
+  dbConfig();
 
-// allow the application to be accessed by any client
-app.use(cors());
+  server.listen(process.env.PORT || defaultPort);
+}
 
-// let the socket object be accessed throughout the application
-app.use((req, res, next) => {
-  req.io = io;
-
-  return next();
-});
-
-// allow json messages
-app.use(express.json());
-
-// allow file uploads
-app.use(express.urlencoded({ extended: true }));
-
-// will handle the routes
-app.use(require('./routes'));
-
-// let stored files be accessed by URL
-const tmpFolder = path.resolve(__dirname, '..', 'tmp');
-app.use('/files', express.static(tmpFolder));
-
-server.listen(process.env.PORT || defaultPort);
+run();
