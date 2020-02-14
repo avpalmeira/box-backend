@@ -8,18 +8,18 @@ const FileController = require('./controllers/FileController');
 const routes = express.Router();
 
 routes.post(
-  '/boxes',
+  '/box',
   BoxController.store
 );
 
 routes.post(
-  '/boxes/:id/files',
+  '/box/:id/file',
   multer(multerConfig).single('file'),
   FileController.store
 );
 
 routes.get(
-  '/boxes/:id',
+  '/box/:id',
   BoxController.show
 );
 

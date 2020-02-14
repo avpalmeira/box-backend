@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-const base_url = 'http://localhost:3333'; //HOST:PORT
-
 // defining schema
 const File = new mongoose.Schema(
     {
@@ -23,9 +21,9 @@ const File = new mongoose.Schema(
 
 // define virtual attribute 'url'
 File.virtual('url').get(function() {
-    const url = process.env.URL || base_url;
+    const url = process.env.URL || process.env.DEV_URL;
     
-    return `${url}/files/${encodeURIComponent(this.path)}`;
+    return `${url}/file/${encodeURIComponent(this.path)}`;
 });
 
-module.exports = mongoose.model('File', File);
+module.exports = mongoose.model('File', File, 'file');

@@ -26,7 +26,7 @@ const appConfig = (app, io) => {
   
     // let stored files be accessed by URL
     const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
-    app.use('/files', express.static(tmpFolder));
+    app.use('/file', express.static(tmpFolder));
 }
 
 module.exports = appConfig;

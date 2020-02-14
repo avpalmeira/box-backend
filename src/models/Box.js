@@ -15,4 +15,4 @@ const Box = new mongoose.Schema(
     { timestamps : true }
 )
 
-module.exports = mongoose.model('Box', Box);
+module.exports = mongoose.model('Box', Box, 'box');

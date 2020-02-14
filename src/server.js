@@ -1,12 +1,15 @@
 const express = require('express');
+const dotenv = require('dotenv');
 
 const appConfig = require('./config/appConfig');
 const dbConfig = require('./config/dbConfig');
+const envConfig = require('./config/envConfig');
 const socketConfig = require('./config/socketConfig');
 
 function run() {
 
-  const defaultPort = 3333;
+  // get port from defined variables
+  const port = envConfig();
 
   // main application
   const app = express();
@@ -14,12 +17,14 @@ function run() {
   // using websockets for real time support
   const server = require('http').Server(app);
   const io = require('socket.io')(server);
-  
+
   appConfig(app, io);
   socketConfig(io);
   dbConfig();
 
-  server.listen(process.env.PORT || defaultPort);
+  server.listen(port, () => {
+    console.log('API server running...');
+  });
 }
 
 run();
