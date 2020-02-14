@@ -11,10 +11,8 @@ const dbConfig = () => {
 
     const options = {
         autoIndex: false, // don't build indexes
-        reconnectInterval: 1000, // reconnect every 1s
         poolSize: 10, // maintain up to 10 socket connections
         bufferMaxEntries: 0, // if not connected, return errors immediately
-        autoReconnect: true,
         useNewUrlParser: true,
         useUnifiedTopology: true,
     }
