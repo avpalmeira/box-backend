@@ -1,5 +1,4 @@
 const express = require('express');
-const dotenv = require('dotenv');
 
 const appConfig = require('./config/appConfig');
 const dbConfig = require('./config/dbConfig');
@@ -23,7 +22,7 @@ function run() {
   dbConfig();
 
   server.listen(port, () => {
-    console.log('API server running...');
+    console.log(`API server running on port: ${port}`);
   });
 }
 

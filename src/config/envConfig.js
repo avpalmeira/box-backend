@@ -1,9 +1,10 @@
-const dotenv = require('dotenv');
-
 // set environment variables
 const envConfig = () => {
-  
-  dotenv.config();
+
+  if (process.env.NODE_ENV != 'production') {
+    const dotenv = require('dotenv');
+    dotenv.config();
+  }
 
   // define url for development
   const protocol = process.env.PROTOCOL || 'http';
